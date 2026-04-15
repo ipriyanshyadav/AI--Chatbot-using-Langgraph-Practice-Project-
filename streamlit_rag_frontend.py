@@ -94,6 +94,11 @@ else:
 
 # ============================ Main Layout ========================
 st.title("Multi Utility Chatbot")
+st.subheader("""This chatbot can:
+    1. Chat with your PDFs
+    2. Search the web
+    3. Calculate math problems
+    4. Get stock prices""")
 
 # Chat area
 for message in st.session_state["message_history"]:

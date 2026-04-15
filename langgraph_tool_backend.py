@@ -3,7 +3,7 @@
 from langgraph.graph import StateGraph, START, END
 from typing import TypedDict, Annotated
 from langchain_core.messages import BaseMessage, HumanMessage
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_huggingface import HuggingFaceEmbeddings, ChatHuggingFace, HuggingFaceEndpoint
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
@@ -19,10 +19,14 @@ load_dotenv()
 # 1. LLM
 # -------------------
 llm= HuggingFaceEndpoint(
-    repo_id="meta-llama/Llama-3.2-1B-Instruct",
-    task="conversational"
-)
+    repo_id="meta-llama/Llama-3.1-8B-Instruct",
+    task="conversational")
+
 model= ChatHuggingFace(llm= llm)
+llm= model
+
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
 # -------------------
 # 2. Tools
 # -------------------
